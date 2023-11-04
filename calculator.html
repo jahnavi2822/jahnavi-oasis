@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="styles.css">
+    <title>HTML Calculator</title>
+    <style>
+        table {
+            border: 1px solid black;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        input[type="button"] {
+            width: 100%;
+            padding: 25px 35px;
+            background-color: blue;
+            color: yellow;
+            font-size: 20px;
+            font-weight: bold;
+            border: black;
+            border-radius: 6px;
+        }
+
+        input[type="text"] {
+            padding: 30px 30px;
+            font-size: 20px;
+            font-weight: bold;
+            border: black;
+            border-radius: 5px;
+            border: 2px solid yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <table id="calcu">
+        <tr>
+            <td colspan="3">
+                <input type="text" id="result">
+            </td>
+            <td><input type="button" value="c" onclick="clr()"></td>
+        </tr>
+
+        <tr>
+            <td><input type="button" value="1" onclick="dis('1')"></td>
+            <td><input type="button" value="2" onclick="dis('2')"></td>
+            <td><input type="button" value="3" onclick="dis('3')"></td>
+            <td><input type="button" value="/" onclick="dis('/')"></td>
+        </tr>
+        <tr>
+            <td><input type="button" value="4" onclick="dis('4')"></td>
+            <td><input type="button" value="5" onclick="dis('5')"></td>
+            <td><input type="button" value="6" onclick="dis('6')"></td>
+            <td><input type="button" value="*" onclick="dis('*')"></td>
+        </tr>
+        <tr>
+            <td><input type="button" value="7" onclick="dis('7')"></td>
+            <td><input type="button" value="8" onclick="dis('8')"></td>
+            <td><input type="button" value="9" onclick="dis('9')"></td>
+            <td><input type="button" value="-" onclick="dis('-')"></td>
+        </tr>
+        <tr>
+            <td><input type="button" value="0" onclick="dis('0')"></td>
+            <td><input type="button" value="." onclick="dis('.')"></td>
+            <td><input type="button" value="=" onclick="solve()"></td>
+            <td><input type="button" value="+" onclick="dis('+')"></td>
+        </tr>
+    </table>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.6.0/math.js"></script>
+    <script>
+        function dis(val) {
+            document.getElementById("result").value += val;
+        }
+
+        function solve() {
+            let x = document.getElementById("result").value;
+            let y = math.evaluate(x);
+            document.getElementById("result").value = y;
+        }
+
+        function clr() {
+            document.getElementById("result").value = "";
+        }
+
+        document.addEventListener("keydown", function (event) {
+            if (
+                event.key == "0" ||
+                event.key == "1" ||
+                event.key == "2" ||
+                event.key == "3" ||
+                event.key == "4" ||
+                event.key == "5" ||
+                event.key == "6" ||
+                event.key == "7" ||
+                event.key == "8" ||
+                event.key == "9" ||
+                event.key == "+" ||
+                event.key == "-" ||
+                event.key == "*" ||
+                event.key == "/" ||
+                event.key == "."
+            ) {
+                document.getElementById("result").value += event.key;
+            } else if (event.key == "Enter") {
+                solve();
+            }
+        });
+    </script>
+</body>
+
+</html>
